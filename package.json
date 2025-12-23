@@ -12,6 +12,7 @@
     "docker-stop": "docker stop consulta-processual || true",
     "docker-rm": "docker rm consulta-processual || true",
     "docker-start": "npm run docker-build && npm run docker-run",
-    "docker-restart": "npm run docker-stop && npm run docker-rm && npm run docker-start"
+    "docker-restart": "npm run docker-stop && npm run docker-rm && npm run docker-start",
+    "publish": "git pull && git add . && git commit -m 'update' && git push"
   }
 }
