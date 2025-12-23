@@ -99,7 +99,7 @@ async def check(case_number: str):
             "Documentos": documents}
 
 
-@app.get("/tjmg/{case_number}")
+@app.get("/pje/{case_number}")
 async def route(case_number: str):
     return await check(case_number)
 

@@ -1,8 +1,8 @@
-# ⚖️ Consulta Processual TJMG
+# ⚖️ Consulta Processual PJe
 
-> API ágil e eficiente para consulta pública de processos judiciais no TJMG.
+> API ágil e eficiente para consulta pública de processos judiciais no sistema PJe.
 
-Bem-vindo ao **Consulta Processual**, uma solução robusta baseada em **FastAPI** e **Playwright** projetada para automatizar a extração de dados públicos do sistema PJe do Tribunal de Justiça de Minas Gerais.
+Bem-vindo ao **Consulta Processual**, uma solução robusta baseada em **FastAPI** e **Playwright** projetada para automatizar a extração de dados públicos de sistemas PJe (Processo Judicial Eletrônico).
 
 ---
 
@@ -66,11 +66,11 @@ Se você possui Node.js instalado, utilize os scripts facilitadores do `package.
 Recupera todas as informações disponíveis para um número de processo.
 
 **Endpoint:**
-`GET /tjmg/{numero_do_processo}`
+`GET /pje/{numero_do_processo}`
 
 **Exemplo de Requisição:**
 ```bash
-curl http://localhost:8000/tjmg/5009028-56.2023.8.13.0145
+curl http://localhost:8000/pje/5009028-56.2023.8.13.0145
 ```
 
 **Formato da Resposta:**
