@@ -1,0 +1,17 @@
+{
+  "name": "consulta-processual",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "docker-build": "docker build -t consulta-processual .",
+    "docker-run": "docker run -d -p 8000:8000 --name consulta-processual consulta-processual",
+    "docker-stop": "docker stop consulta-processual || true",
+    "docker-rm": "docker rm consulta-processual || true",
+    "docker-start": "npm run docker-build && npm run docker-run",
+    "docker-restart": "npm run docker-stop && npm run docker-rm && npm run docker-start"
+  }
+}
