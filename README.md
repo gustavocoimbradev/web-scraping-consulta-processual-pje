@@ -1,104 +1,74 @@
-# ⚖️ Consulta Processual PJe
+# Consulta Processual PJe
 
-> API ágil e eficiente para consulta pública de processos judiciais no sistema PJe.
+API para consulta pública de processos judiciais em sistemas PJe, desenvolvida com FastAPI e Playwright.
 
-Bem-vindo ao **Consulta Processual**, uma solução robusta baseada em **FastAPI** e **Playwright** projetada para automatizar a extração de dados públicos de sistemas PJe (Processo Judicial Eletrônico).
+## Como Usar
+
+### Execução via Docker
+
+Utilize os scripts configurados no `package.json`:
+
+*   **Iniciar**: `npm run docker-start` (Disponibiliza a API na porta 8000)
+*   **Parar**: `npm run docker-stop`
+*   **Reiniciar**: `npm run docker-restart`
+
+### Execução Local
+
+1.  Instale as dependências:
+    ```bash
+    pip install -r requirements.txt
+    ```
+2.  Instale o navegador necessário:
+    ```bash
+    playwright install chromium
+    ```
+3.  Inicie o servidor:
+    ```bash
+    python main.py
+    ```
 
 ---
 
-## 🚀 Funcionalidades
-
-Este projeto oferece uma API simples para acessar dados complexos:
-
-- **🔍 Coleta de Metadados**: Extrai automaticamente Polo Ativo, Polo Passivo, Juízo, Classe, e outros detalhes vitais do processo.
-- **📜 Histórico de Movimentações**: Recupera a lista completa de andamentos processuais.
-- **📂 Acesso a Documentos**: Gera links diretos para visualização de documentos anexados.
-- **⚡ Alta Performance**: Utiliza execução assíncrona para respostas rápidas.
-- **🐳 Docker Ready**: Ambiente containerizado configurado para deploy imediato.
-
-## 🛠️ Tech Stack
-
-Construído com tecnologias modernas para garantir estabilidade e escalabilidade:
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-
-## 🏁 Como Iniciar
-
-Você pode rodar este projeto localmente ou em um container Docker.
-
-### 🏠 Execução Local
-
-1. **Clone o repositório e instale as dependências Python:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. **Instale as dependências do browser (Chromium):**
-   ```bash
-   playwright install chromium
-   ```
-
-3. **Inicie o servidor:**
-   ```bash
-   python main.py
-   ```
-   🚀 O servidor estará rodando em: `http://localhost:8000`
-
-### 🐳 Execução via Docker (Recomendado)
-
-Se você possui Node.js instalado, utilize os scripts facilitadores do `package.json`:
-
-| Ação | Comando | Descrição |
-| :--- | :--- | :--- |
-| **Iniciar** | `npm run docker-start` | Compila a imagem e inicia o container na porta 8000. |
-| **Parar** | `npm run docker-stop` | Para o container em execução. |
-| **Reiniciar** | `npm run docker-restart` | Para, remove e recria o container do zero. |
-
-> Alternativamente, você pode usar comandos Docker nativos (`docker build` e `docker run`) conforme definido no script.
-
-## 🔌 Documentação da API
+## API
 
 ### Consultar Processo
 
-Recupera todas as informações disponíveis para um número de processo.
+**Endpoint:** `GET /pje/{numero_do_processo}`
 
-**Endpoint:**
-`GET /pje/{numero_do_processo}`
-
-**Exemplo de Requisição:**
+**Exemplo de uso:**
 ```bash
-curl http://localhost:8000/pje/5009028-56.2023.8.13.0145
+curl http://localhost:8000/pje/5000680-02.2025.8.13.0707
 ```
 
-**Formato da Resposta:**
+**Exemplo de Resposta:**
+
 ```json
 {
   "Informações": {
-    "Polo Ativo": "Fulano de Tal",
-    "Polo Passivo": "Empresa X",
-    "Classe": "Procedimento Comum Cível",
-    ...
+    "Polo Ativo": "GUSTAVO LIMA COIMBRA - CPF: 135.351.516-86 (RECORRENTE)",
+    "Polo Passivo": "EBAZAR.COM.BR. LTDA - CNPJ: 03.007.331/0001-41 (RECORRIDO(A))",
+    "Número Processo": "5000680-02.2025.8.13.0707",
+    "Data da Distribuição": "20/01/2025",
+    "Classe Judicial": "[CÍVEL] PROCEDIMENTO DO JUIZADO ESPECIAL CÍVEL (436)",
+    "Assunto": "DIREITO CIVIL (899)  -  Responsabilidade Civil (10431)  -  Indenização por Dano Moral (10433\n    DIREITO DO CONSUMIDOR (1156)  -  Responsabilidade do Fornecedor (6220)  -  Rescisão do contrato e devolução do dinheiro (7768",
+    "Jurisdição": "Varginha - Juizado Especial",
+    "Órgão Julgador": "Unidade Jurisdicional Cível - 1º JD da Comarca de Varginha"
   },
   "Movimentações": [
-    "Expedição de documento",
-    "Conclusos para despacho",
-    ...
+    "16/06/2025 12:04:36 - Arquivado Definitivamente",
+    "16/06/2025 12:04:14 - Expedição de Certidão Trânsito em Julgado.",
+    "22/05/2025 00:27:26 - Decorrido prazo de GUSTAVO LIMA COIMBRA em 21/05/2025 23:59.",
+    "..."
   ],
   "Documentos": [
     {
-      "title": "Petição Inicial",
-      "url": "https://..."
+      "title": "24/03/2025 13:31:01 - Projeto de Sentença-Jesp (Projeto de Sentença-Jesp)",
+      "url": "https://pje-consulta-publica.tjmg.jus.br:443/pje/ConsultaPublica/DetalheProcessoConsultaPublica/documentoSemLoginHTML.seam?ca=..."
     },
-    ...
+    {
+      "title": "20/03/2025 15:40:55 - ATA - (11) (Ata de Audiência (Sem Sentença))",
+      "url": "https://pje-consulta-publica.tjmg.jus.br/pje/ConsultaPublica/DetalheProcessoConsultaPublica/listView.seam?idBin=..."
+    }
   ]
 }
 ```
-
----
-
-<div align="center">
-  <sub>Desenvolvido com foco em automação jurídica.</sub>
-</div>
