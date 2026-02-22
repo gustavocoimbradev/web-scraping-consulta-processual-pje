@@ -1,4 +1,4 @@
-# web-scraping-consulta-processual-pje
+# PJe Web Scraping API
 
 API de **Web Scraping** para consulta pública de processos judiciais em sistemas PJe, desenvolvida com FastAPI e Playwright.
 
@@ -74,3 +74,4 @@ curl http://localhost:8000/pje/5000000-00.2025.8.13.0000
   ]
 }
 ```
+
